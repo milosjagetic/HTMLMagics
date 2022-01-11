@@ -29,9 +29,9 @@ open class HTMLContainerElement: HTMLContainerElementType
     }
 
     convenience init(_ htmlTag: HTMLTag, 
-                    _ attributes: HTMLAttributes?, 
                     _ id: String?,
                     _ classProvider: CSSClassProvider?,
+                    _ attributes: HTMLAttributes?, 
                     @HTMLContainerElementBuilder _ childrenBuilder: () -> [HTMLBaseType] = { [] } )
     {
         self.init(htmlTag: htmlTag, 
