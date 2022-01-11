@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "swift build"
+            "command": "swift build --build-tests"
         }
     ]
 }
