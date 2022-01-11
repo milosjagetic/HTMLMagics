@@ -39,8 +39,12 @@ public extension HTMLElementType
         let attrString = attrsWithClass.reduce([], { $0 + [$1] })
                             .map({ "\($0)=\"\($1)\""})
                             .joined(separator: " ")
+                            
+        let startInner = [htmlTag.rawValue, attrString.isEmpty ? nil : attrString]
+                            .compactMap { $0 }
+                            .joined(separator: " ")
+        let start = "<\(startInner)>"
 
-        let start = "<\(htmlTag.rawValue) \(attrString)>"
         guard let innerHTML = innerHTML else { return start }
         return start + "\(innerHTML)</\(htmlTag.rawValue)>" 
     }
