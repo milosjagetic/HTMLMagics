@@ -16,18 +16,18 @@
  */
 
 
-open class Button: HTMLContainerElement<Button.AttributeKey>
+open class Button: HTMLContainerElement, HTMLAttributeAccess
 {
     public enum AttributeKey: String
     {
         case onClick
     }
     
-    convenience init(id: String? = nil, 
-                    attributes: HTMLAttributes? = nil, 
-                    classProvider: CSSClassProvider? = nil,
-                    children: [HTMLBaseType] = [],
-                    onClick: String?) 
+    public convenience init(id: String? = nil, 
+                            attributes: HTMLAttributes? = nil, 
+                            classProvider: CSSClassProvider? = nil,
+                            children: [HTMLBaseType] = [],
+                            onClick: String?) 
     {
         self.init(htmlTag: .link, id: id, attributes: attributes, classProvider: classProvider, children: children)
 

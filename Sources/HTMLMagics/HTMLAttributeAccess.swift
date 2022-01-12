@@ -1,6 +1,6 @@
 /**
- * File: Input.swift
- * File Created: Wednesday, 12th January 2022 7:32:10 pm
+ * File: HTMLAttributeAccess.swift
+ * File Created: Wednesday, 12th January 2022 9:23:53 pm
  * Author: Miloš Jagetić (milos.jagetic@gmail.com)
  * -----
  * Begin license text.
@@ -15,30 +15,33 @@
  * End license text.
  */
 
-open class Input: HTMLElement, HTMLAttributeAccess
+
+public protocol HTMLAttributeAccess: HTMLElementType & AnyObject
 {
-    public enum InputType: String
+    associatedtype AttributeKey: RawRepresentable
+
+    var attributes: HTMLAttributes? { get set }
+}
+
+public extension HTMLAttributeAccess
+{
+    subscript(attribute key: AttributeKey) -> String?
+    where AttributeKey.RawValue == String
     {
-        case text
-        case checkbox
-        case password
+        get { getAttribute(key) }
+        set { setAttribute(key, value: newValue) }
     }
 
-    public enum AttributeKey: String
-    {
-        case type
-        case placeholder
+
+    func getAttribute(_ key: AttributeKey) -> String? 
+    where AttributeKey.RawValue == String
+    { 
+        attributes?[key.rawValue] 
     }
 
-    public convenience init(id: String? = nil,
-                            attributes: HTMLAttributes? = nil,
-                            classProvider: CSSClassProvider? = nil,
-                            type: InputType,
-                            placeholder: String? = nil)
-    {
-        self.init(htmlTag: .input, id: id, attributes: attributes, classProvider: classProvider)
-
-        self[attribute: .type] = type.rawValue
-        self[attribute: .placeholder] = placeholder
+    func setAttribute(_ key: AttributeKey, value: String?)
+    where AttributeKey.RawValue == String 
+    { 
+        attributes = (attributes ?? [:]).setting([(key.rawValue, value)]) 
     }
 }

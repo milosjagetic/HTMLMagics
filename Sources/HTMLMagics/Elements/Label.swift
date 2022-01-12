@@ -16,7 +16,7 @@
  */
 
 
-open class Label: HTMLContainerElement<Label.AttributeKey>
+open class Label: HTMLContainerElement, HTMLAttributeAccess
 {
     public enum AttributeKey: String
     {
@@ -24,12 +24,12 @@ open class Label: HTMLContainerElement<Label.AttributeKey>
         case form
     }
     
-    convenience init(id: String? = nil,
-                    attributes: HTMLAttributes? = nil, 
-                    classProvider: CSSClassProvider? = nil, 
-                    children: [HTMLBaseType] = [], 
-                    forId: String? = nil,
-                    formId: String? = nil) 
+    public convenience init(id: String? = nil,
+                            attributes: HTMLAttributes? = nil, 
+                            classProvider: CSSClassProvider? = nil, 
+                            children: [HTMLBaseType] = [], 
+                            forId: String? = nil,
+                            formId: String? = nil) 
     {
         self.init(htmlTag: .label, id: id, attributes: attributes, classProvider: classProvider, children: children)
 

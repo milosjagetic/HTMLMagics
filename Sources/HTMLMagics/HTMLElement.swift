@@ -15,7 +15,7 @@
  * End license text.
  */
 
-open class HTMLElement<AttributeKey: RawRepresentable>: HTMLElementType
+open class HTMLElement: HTMLElementType
 {
     public let htmlTag: HTMLTag
     public var attributes: HTMLAttributes? 
@@ -31,25 +31,5 @@ open class HTMLElement<AttributeKey: RawRepresentable>: HTMLElementType
         self.id = id
         self.attributes = attributes
         self.classProvider = classProvider
-    }
-
-    public subscript(attribute key: AttributeKey) -> String?
-    where AttributeKey.RawValue == String
-    {
-        get { getAttribute(key) }
-        set { setAttribute(key, value: newValue) }
-    }
-
-
-    public func getAttribute(_ key: AttributeKey) -> String? 
-    where AttributeKey.RawValue == String
-    { 
-        attributes?[key.rawValue] 
-    }
-
-    public func setAttribute(_ key: AttributeKey, value: String?)
-    where AttributeKey.RawValue == String 
-    { 
-        attributes = (attributes ?? [:]).setting([(key.rawValue, value)]) 
     }
 }

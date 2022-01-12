@@ -34,9 +34,12 @@ final class HTMLMagicsTests: XCTestCase
         container.children.append("basic child")
         MyAssert(container.html, "<div>basic child</div>", "Failed basic container element test with child")
 
+        container.children.append(HTMLContainerElement(htmlTag: .div, children: ["nja"]))
+        MyAssert(container.html, "<div>basic child<div>nja</div></div>", "Failed basic container element test with two children")
+
         container.id = "some-id"
         MyAssert(container.html, 
-                "<div id=\"some-id\">basic child</div>", 
+                "<div id=\"some-id\">basic child<div>nja</div></div>", 
                 "Failed basic container element test with id and child")
     }
 }

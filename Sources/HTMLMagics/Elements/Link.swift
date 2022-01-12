@@ -17,7 +17,7 @@
 
  import Foundation
 
-open class Link: HTMLElement<Link.AttributeKey>
+open class Link: HTMLElement, HTMLAttributeAccess
 {
     public enum Rel: String
     {
@@ -44,11 +44,11 @@ open class Link: HTMLElement<Link.AttributeKey>
         case href
     }
     
-    convenience init(id: String? = nil, 
-                    attributes: HTMLAttributes? = nil, 
-                    classProvider: CSSClassProvider? = nil,
-                    rel: Rel,
-                    href: URL?) 
+    public convenience init(id: String? = nil, 
+                            attributes: HTMLAttributes? = nil, 
+                            classProvider: CSSClassProvider? = nil,
+                            rel: Rel,
+                            href: URL?) 
     {
         self.init(htmlTag: .link, id: id, attributes: attributes, classProvider: classProvider)
 

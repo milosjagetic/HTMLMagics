@@ -21,7 +21,7 @@
 //  \\= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =//
 public protocol HTMLBaseType
 {
-    var html: String { get}
+    var html: String { get }
 }
 
 extension String: HTMLBaseType

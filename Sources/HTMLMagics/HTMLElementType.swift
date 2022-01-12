@@ -68,13 +68,20 @@ public extension HTMLContainerElementType
 {
     var html: String
     {
+        containerHTML
+    }
+
+    private var containerHTML: String
+    {
         let start = startOfHTML
         guard let innerHTML = innerHTML else { return start }
         return start + "\(innerHTML)</\(htmlTag.rawValue)>" 
-
     }
     
-    var innerHTML: String? { children.map({ $0.html }).joined() }
+    var innerHTML: String? 
+    {
+        return children.map({ ($0 as? HTMLContainerElementType)?.containerHTML ?? $0.html }).joined() 
+    }
 }
 
 

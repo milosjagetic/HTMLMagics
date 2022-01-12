@@ -15,7 +15,7 @@
  * End license text.
  */
 
-open class HTMLContainerElement<AttributeKey: RawRepresentable>: HTMLElement<AttributeKey>, HTMLContainerElementType
+open class HTMLContainerElement: HTMLElement, HTMLContainerElementType
 {
     public var children: [HTMLBaseType]
 
@@ -26,7 +26,6 @@ open class HTMLContainerElement<AttributeKey: RawRepresentable>: HTMLElement<Att
                 children: [HTMLBaseType] = [])
     {
         self.children = children
-
         super.init(htmlTag: htmlTag, id: id, attributes: attributes, classProvider: classProvider)
     }
 }
