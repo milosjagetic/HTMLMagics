@@ -1,6 +1,6 @@
 /**
- * File: HTMLMagicsTests.swift
- * File Created: Tuesday, 11th January 2022 10:24:39 pm
+ * File: Link.swift
+ * File Created: Wednesday, 12th January 2022 7:47:38 pm
  * Author: Miloš Jagetić (milos.jagetic@gmail.com)
  * -----
  * Begin license text.
@@ -15,33 +15,44 @@
  * End license text.
  */
 
-import XCTest
-@testable import HTMLMagics
+ import Foundation
 
-final class HTMLMagicsTests: XCTestCase 
+open class Link: HTMLElement<Link.AttributeKey>
 {
-    func testBasics() throws
+    public enum Rel: String
     {
-        let element = HTMLElement(htmlTag: .input)
-        MyAssert(element.html, "<input>", "Failed basic element test")
-
-        element.attributes = ["some" : "attribute"]
-        MyAssert(element.html, "<input some=\"attribute\">", "Failed basic element test with attributes")
-
-        let container = HTMLContainerElement(htmlTag: .div)
-        MyAssert(container.html, "<div></div>", "Failed basic container element test")
-
-        container.children.append("basic child")
-        MyAssert(container.html, "<div>basic child</div>", "Failed basic container element test with child")
-
-        container.id = "some-id"
-        MyAssert(container.html, 
-                "<div id=\"some-id\">basic child</div>", 
-                "Failed basic container element test with id and child")
+        case alternate
+        case author
+        case dnsPrefetch = "dns-prefetch"
+        case help
+        case icon
+        case license
+        case next
+        case pingback
+        case preconnect
+        case prefetch
+        case preload
+        case prerender
+        case prev
+        case search
+        case stylesheet
     }
-}
 
-private func MyAssert<T: Equatable>(_ specimen: T,_ target: T, _ message: String)
-{
-    XCTAssert(specimen == target, "\n🛑" + message + "\nExpected\t\(target),\ngot\t\t\(specimen)!")
+    public enum AttributeKey: String
+    {
+        case rel
+        case href
+    }
+    
+    convenience init(id: String? = nil, 
+                    attributes: HTMLAttributes? = nil, 
+                    classProvider: CSSClassProvider? = nil,
+                    rel: Rel,
+                    href: URL?) 
+    {
+        self.init(htmlTag: .link, id: id, attributes: attributes, classProvider: classProvider)
+
+        self[attribute: .rel] = rel.rawValue
+        self[attribute: .href] = href?.absoluteString
+    }
 }

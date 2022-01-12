@@ -23,7 +23,6 @@ public protocol HTMLElementType: HTMLBaseType
 {
     var htmlTag: HTMLTag { get }
     var attributes: HTMLAttributes? { get }
-    var innerHTML: String? { get }
     var classProvider: CSSClassProvider? { get }
     var id: String? { get }
 }
@@ -32,6 +31,15 @@ public extension HTMLElementType
 {
     var html: String 
     { 
+        return startOfHTML
+    }
+
+    var attributes: HTMLAttributes? { nil }
+    var classProvider: CSSClassProvider? { nil }
+    var id: String? { nil }
+
+    internal var startOfHTML: String
+    {
         let attrsWithClass = (attributes ?? [:]).merging([("class", classProvider?.cssClass),
                                                           ("id", id)].asDictionary, 
                                                          uniquingKeysWith: { _ = $0; return $1; })
@@ -43,16 +51,8 @@ public extension HTMLElementType
         let startInner = [htmlTag.rawValue, attrString.isEmpty ? nil : attrString]
                             .compactMap { $0 }
                             .joined(separator: " ")
-        let start = "<\(startInner)>"
-
-        guard let innerHTML = innerHTML else { return start }
-        return start + "\(innerHTML)</\(htmlTag.rawValue)>" 
+        return "<\(startInner)>"
     }
-
-    var innerHTML: String? { nil }
-    var attributes: HTMLAttributes? { nil }
-    var classProvider: CSSClassProvider? { nil }
-    var id: String? { nil }
 }
 
 
@@ -66,6 +66,14 @@ public protocol HTMLContainerElementType: HTMLElementType
 
 public extension HTMLContainerElementType
 {
+    var html: String
+    {
+        let start = startOfHTML
+        guard let innerHTML = innerHTML else { return start }
+        return start + "\(innerHTML)</\(htmlTag.rawValue)>" 
+
+    }
+    
     var innerHTML: String? { children.map({ $0.html }).joined() }
 }
 

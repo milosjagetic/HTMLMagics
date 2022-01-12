@@ -15,43 +15,19 @@
  * End license text.
  */
 
-open class HTMLContainerElement: HTMLContainerElementType
+open class HTMLContainerElement<AttributeKey: RawRepresentable>: HTMLElement<AttributeKey>, HTMLContainerElementType
 {
-    public let htmlTag: HTMLTag
-    public let attributes: HTMLAttributes?
-    public let children: [HTMLBaseType]
-    public let id: String?
-    public let classProvider: CSSClassProvider?
-
-    convenience init(_ htmlTag: HTMLTag, _ classProvider: CSSClassProvider?, _ children: [HTMLBaseType])
-    {
-        self.init(htmlTag: htmlTag, id: nil, classProvider: classProvider, attributes: nil, children: children)
-    }
-
-    convenience init(_ htmlTag: HTMLTag, 
-                    _ id: String?,
-                    _ classProvider: CSSClassProvider?,
-                    _ attributes: HTMLAttributes?, 
-                    @HTMLContainerElementBuilder _ childrenBuilder: () -> [HTMLBaseType] = { [] } )
-    {
-        self.init(htmlTag: htmlTag, 
-                  id: id, 
-                  classProvider: classProvider, 
-                  attributes: attributes, 
-                  children: childrenBuilder())
-    }
+    public var children: [HTMLBaseType]
 
     public init(htmlTag: HTMLTag,
                 id: String? = nil,
-                classProvider: CSSClassProvider? = nil,
                 attributes: HTMLAttributes? = nil, 
+                classProvider: CSSClassProvider? = nil,                
                 children: [HTMLBaseType] = [])
     {
-        self.htmlTag = htmlTag
-        self.attributes = attributes
         self.children = children
-        self.id = id
-        self.classProvider = classProvider
+
+        super.init(htmlTag: htmlTag, id: id, attributes: attributes, classProvider: classProvider)
     }
 }
 

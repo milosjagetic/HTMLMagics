@@ -23,10 +23,23 @@ where Element == (String, String?)
     public var asDictionary: [String : String]
     {
         compactMap({ $0.1 != nil ? $0 : nil })
-        .reduce([:], 
-            {  
-                $0.merging([$1.0 : $1.1!], uniquingKeysWith: { _ = $1; return $0; })
-            })
+        .reduce([:], { $0.setting([$1.0 : $1.1!]) })
+    }
+}
+
+extension HTMLAttributes
+{    
+    public func setting(_ attributes: HTMLAttributes) -> HTMLAttributes
+    {
+        return merging(attributes, uniquingKeysWith: { _ = $0; return $1; })
+    }
+
+    public func setting(_ pairs: [(String, String?)]) -> HTMLAttributes
+    {
+        var new = self
+        for i in pairs { new[i.0] = i.1 }
+
+        return new
     }
 }
 

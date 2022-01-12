@@ -1,6 +1,6 @@
 /**
- * File: HTMLMagicsTests.swift
- * File Created: Tuesday, 11th January 2022 10:24:39 pm
+ * File: HTMLElement.swift
+ * File Created: Wednesday, 12th January 2022 2:52:10 pm
  * Author: Miloš Jagetić (milos.jagetic@gmail.com)
  * -----
  * Begin license text.
@@ -15,33 +15,41 @@
  * End license text.
  */
 
-import XCTest
-@testable import HTMLMagics
-
-final class HTMLMagicsTests: XCTestCase 
+open class HTMLElement<AttributeKey: RawRepresentable>: HTMLElementType
 {
-    func testBasics() throws
+    public let htmlTag: HTMLTag
+    public var attributes: HTMLAttributes? 
+    public var classProvider: CSSClassProvider? 
+    public var id: String? 
+
+    public init(htmlTag: HTMLTag, 
+                id: String? = nil, 
+                attributes: HTMLAttributes? = nil, 
+                classProvider: CSSClassProvider? = nil)
     {
-        let element = HTMLElement(htmlTag: .input)
-        MyAssert(element.html, "<input>", "Failed basic element test")
-
-        element.attributes = ["some" : "attribute"]
-        MyAssert(element.html, "<input some=\"attribute\">", "Failed basic element test with attributes")
-
-        let container = HTMLContainerElement(htmlTag: .div)
-        MyAssert(container.html, "<div></div>", "Failed basic container element test")
-
-        container.children.append("basic child")
-        MyAssert(container.html, "<div>basic child</div>", "Failed basic container element test with child")
-
-        container.id = "some-id"
-        MyAssert(container.html, 
-                "<div id=\"some-id\">basic child</div>", 
-                "Failed basic container element test with id and child")
+        self.htmlTag = htmlTag
+        self.id = id
+        self.attributes = attributes
+        self.classProvider = classProvider
     }
-}
 
-private func MyAssert<T: Equatable>(_ specimen: T,_ target: T, _ message: String)
-{
-    XCTAssert(specimen == target, "\n🛑" + message + "\nExpected\t\(target),\ngot\t\t\(specimen)!")
+    public subscript(attribute key: AttributeKey) -> String?
+    where AttributeKey.RawValue == String
+    {
+        get { getAttribute(key) }
+        set { setAttribute(key, value: newValue) }
+    }
+
+
+    public func getAttribute(_ key: AttributeKey) -> String? 
+    where AttributeKey.RawValue == String
+    { 
+        attributes?[key.rawValue] 
+    }
+
+    public func setAttribute(_ key: AttributeKey, value: String?)
+    where AttributeKey.RawValue == String 
+    { 
+        attributes = (attributes ?? [:]).setting([(key.rawValue, value)]) 
+    }
 }
