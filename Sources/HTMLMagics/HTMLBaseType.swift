@@ -61,3 +61,30 @@ where Element: CSSClassProvider
 {
     public var cssClass: String { map { $0.cssClass }.joined(separator: " ") }
 }
+
+
+public enum Rel: String
+{
+    case alternate
+    case author
+    case bookmark
+    case external
+    case dnsPrefetch = "dns-prefetch"
+    case help
+    case icon
+    case license
+    case next
+    case manifest
+    case noFollow = "nofollow"
+    case noOpener = "noopener"
+    case noReferrer = "noReferrer"
+    case pingback
+    case preconnect
+    case prefetch
+    case preload
+    case prerender
+    case prev
+    case search
+    case stylesheet
+    case tag
+}

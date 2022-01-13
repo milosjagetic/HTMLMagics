@@ -19,25 +19,6 @@
 
 open class Link: HTMLElement, HTMLAttributeAccess
 {
-    public enum Rel: String
-    {
-        case alternate
-        case author
-        case dnsPrefetch = "dns-prefetch"
-        case help
-        case icon
-        case license
-        case next
-        case pingback
-        case preconnect
-        case prefetch
-        case preload
-        case prerender
-        case prev
-        case search
-        case stylesheet
-    }
-
     public enum AttributeKey: String
     {
         case rel
