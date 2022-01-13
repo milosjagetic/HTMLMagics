@@ -17,19 +17,22 @@
 
 open class HTMLElement: HTMLElementType
 {
-    public let htmlTag: HTMLTag
-    public var attributes: HTMLAttributes? 
-    public var classProvider: CSSClassProvider? 
-    public var id: String? 
+    open var htmlTag: HTMLTag { _htmlTag }
+    open var attributes: HTMLAttributes? 
+    open var classProvider: CSSClassProvider? { _classProvider }
+    open var id: String? 
+
+    private var _htmlTag: HTMLTag
+    private var _classProvider: CSSClassProvider?
 
     public init(htmlTag: HTMLTag, 
                 id: String? = nil, 
                 attributes: HTMLAttributes? = nil, 
                 classProvider: CSSClassProvider? = nil)
     {
-        self.htmlTag = htmlTag
+        self._htmlTag = htmlTag
         self.id = id
         self.attributes = attributes
-        self.classProvider = classProvider
+        self._classProvider = classProvider
     }
 }
