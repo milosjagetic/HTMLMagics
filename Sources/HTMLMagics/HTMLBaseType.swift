@@ -88,3 +88,11 @@ public enum Rel: String
     case stylesheet
     case tag
 }
+
+public enum Target: String
+{
+    case blank
+    case `self`
+    case parent
+    case top
+}
