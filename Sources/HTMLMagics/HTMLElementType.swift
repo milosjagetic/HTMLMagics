@@ -108,4 +108,5 @@ public enum HTMLTag: String
     case nav
     case hr
     case span
+    case form
 }
