@@ -24,24 +24,28 @@ public protocol HTMLAttributeAccess: HTMLElementType & AnyObject
 }
 
 public extension HTMLAttributeAccess
+where AttributeKey.RawValue == String
 {
     subscript(attribute key: AttributeKey) -> String?
-    where AttributeKey.RawValue == String
     {
         get { getAttribute(key) }
         set { setAttribute(key, value: newValue) }
     }
 
-
     func getAttribute(_ key: AttributeKey) -> String? 
-    where AttributeKey.RawValue == String
     { 
         attributes?[key.rawValue] 
     }
 
     func setAttribute(_ key: AttributeKey, value: String?)
-    where AttributeKey.RawValue == String 
     { 
         attributes = (attributes ?? [:]).setting([(key.rawValue, value)]) 
+    }
+
+    func settingAttribute(_ key: AttributeKey, value: String?) -> Self
+    {
+        setAttribute(key, value: value)
+
+        return self
     }
 }
