@@ -28,6 +28,7 @@ open class Input: HTMLElement, HTMLAttributeAccess
     {
         case type
         case placeholder
+        case name
     }
 
     public convenience init(id: String? = nil,
