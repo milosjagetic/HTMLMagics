@@ -25,13 +25,13 @@ open class Link: HTMLElement, HTMLAttributeAccess
         case href
     }
     
-    public convenience init(id: String? = nil, 
-                            attributes: HTMLAttributes? = nil, 
-                            classProvider: CSSClassProvider? = nil,
-                            rel: Rel,
-                            href: URL?) 
+    public required init(id: String? = nil, 
+                        attributes: HTMLAttributes? = nil, 
+                        classProvider: CSSClassProvider? = nil,
+                        rel: Rel,
+                        href: URL?) 
     {
-        self.init(htmlTag: .link, id: id, attributes: attributes, classProvider: classProvider)
+        super.init(htmlTag: .link, id: id, attributes: attributes, classProvider: classProvider)
 
         self[attribute: .rel] = rel.rawValue
         self[attribute: .href] = href?.absoluteString

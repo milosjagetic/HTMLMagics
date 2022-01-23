@@ -31,13 +31,13 @@ open class Input: HTMLElement, HTMLAttributeAccess
         case name
     }
 
-    public convenience init(id: String? = nil,
+    public required init(id: String? = nil,
                             attributes: HTMLAttributes? = nil,
                             classProvider: CSSClassProvider? = nil,
                             type: InputType,
                             placeholder: String? = nil)
     {
-        self.init(htmlTag: .input, id: id, attributes: attributes, classProvider: classProvider)
+        super.init(htmlTag: .input, id: id, attributes: attributes, classProvider: classProvider)
 
         self[attribute: .type] = type.rawValue
         self[attribute: .placeholder] = placeholder

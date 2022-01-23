@@ -24,14 +24,14 @@ open class Label: HTMLContainerElement, HTMLAttributeAccess
         case form
     }
     
-    public convenience init(id: String? = nil,
+    public required init(id: String? = nil,
                             attributes: HTMLAttributes? = nil, 
                             classProvider: CSSClassProvider? = nil, 
                             children: [HTMLBaseType] = [], 
                             forId: String? = nil,
                             formId: String? = nil) 
     {
-        self.init(htmlTag: .label, id: id, attributes: attributes, classProvider: classProvider, children: children)
+        super.init(htmlTag: .label, id: id, attributes: attributes, classProvider: classProvider, children: children)
 
         self[attribute: .for] = forId
         self[attribute: .form] = formId

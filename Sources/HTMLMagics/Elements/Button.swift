@@ -23,13 +23,13 @@ open class Button: HTMLContainerElement, HTMLAttributeAccess
         case onClick
     }
     
-    public convenience init(id: String? = nil, 
+    public required init(id: String? = nil, 
                             attributes: HTMLAttributes? = nil, 
                             classProvider: CSSClassProvider? = nil,
                             children: [HTMLBaseType] = [],
                             onClick: String?) 
     {
-        self.init(htmlTag: .link, id: id, attributes: attributes, classProvider: classProvider, children: children)
+        super.init(htmlTag: .link, id: id, attributes: attributes, classProvider: classProvider, children: children)
 
         self[attribute: .onClick] = onClick
 

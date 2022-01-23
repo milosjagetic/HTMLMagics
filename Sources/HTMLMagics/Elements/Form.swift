@@ -31,7 +31,7 @@ open class Form: HTMLContainerElement, HTMLAttributeAccess
         case target
     }
 
-    public convenience init(id: String? = nil,
+    public required init(id: String? = nil,
                             attributes: HTMLAttributes? = nil, 
                             classProvider: CSSClassProvider? = nil, 
                             children: [HTMLBaseType] = [], 
@@ -39,7 +39,7 @@ open class Form: HTMLContainerElement, HTMLAttributeAccess
                             method: String? = nil,
                             target: Target? = nil) 
     {
-        self.init(htmlTag: .form, id: id, attributes: attributes, classProvider: classProvider, children: children)
+        super.init(htmlTag: .form, id: id, attributes: attributes, classProvider: classProvider, children: children)
 
         self[attribute: .action] = action?.absoluteString
         self[attribute: .target] = target?.rawValue

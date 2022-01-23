@@ -30,14 +30,14 @@ open class Anchor: HTMLContainerElement, HTMLAttributeAccess
         case type
     }
     
-    public convenience init(id: String? = nil,
+    public required init(id: String? = nil,
                             attributes: HTMLAttributes? = nil, 
                             classProvider: CSSClassProvider? = nil, 
                             children: [HTMLBaseType] = [], 
                             href: URL? = nil,
                             target: Target? = nil) 
     {
-        self.init(htmlTag: .a, id: id, attributes: attributes, classProvider: classProvider, children: children)
+        super.init(htmlTag: .a, id: id, attributes: attributes, classProvider: classProvider, children: children)
 
         self[attribute: .href] = href?.absoluteString
         self[attribute: .target] = target?.rawValue
