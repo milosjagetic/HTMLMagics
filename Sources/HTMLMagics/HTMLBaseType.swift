@@ -19,43 +19,31 @@
 //  //= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =\\
 //  HTMLBaseType -
 //  \\= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =//
+
+/// Represents a base HTML type, something that produces a string.
 public protocol HTMLBaseType
 {
     var html: String { get }
 }
 
+// String is the most basic HTMLBaseType
 extension String: HTMLBaseType
 {
     public var html: String { self }
 }
 
 
-public struct HTMLBaseTypeArray: HTMLBaseType, ExpressibleByArrayLiteral
-{
-    public init(arrayLiteral elements: HTMLBaseType...) 
-    {
-        self.items = elements
-    }
-
-    public init(@HTMLContainerElementBuilder builder: () -> [HTMLBaseType] = { [] })
-    {
-        self.items = builder()
-    }
-
-    public let items: [HTMLBaseType]
-
-    public var html: String { items.map({ $0.html }).joined() }
-}
-
-
 //  //= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =\\
 //  CSSClassProvider -
 //  \\= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =//
+
+/// Represents a type that can provide a CSS class string
 public protocol CSSClassProvider
 {
     var cssClass: String { get }
 }
 
+// An array of CSSClassProvider values is itself a CSSClassProvider
 extension Array: CSSClassProvider
 where Element: CSSClassProvider
 {
@@ -63,6 +51,9 @@ where Element: CSSClassProvider
 }
 
 
+//  //= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =\\
+//  Common enums -
+//  \\= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =//
 public enum Rel: String
 {
     case alternate
@@ -77,7 +68,7 @@ public enum Rel: String
     case manifest
     case noFollow = "nofollow"
     case noOpener = "noopener"
-    case noReferrer = "noReferrer"
+    case noReferrer = "noreferrer"
     case pingback
     case preconnect
     case prefetch
