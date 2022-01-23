@@ -90,11 +90,16 @@ public extension HTMLContainerElementType
 //  \\= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =//
 public enum HTMLTag: String
 {
-    case div
-    case link
     case html
+
     case body
     case head
+
+    case link
+    case meta
+    case title
+
+    case div
     case input
     case label
     case button
@@ -109,4 +114,12 @@ public enum HTMLTag: String
     case hr
     case span
     case form
+
+    case table
+    case thead
+    case tbody
+    case tfood
+    case th
+    case td
+    case tr
 }

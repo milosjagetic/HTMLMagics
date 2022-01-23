@@ -49,3 +49,10 @@ where AttributeKey.RawValue == String
         return self
     }
 }
+
+public enum GeneralAttribute: String
+{
+    case rel
+    case target
+    case style
+}
