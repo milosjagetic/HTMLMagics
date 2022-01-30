@@ -114,6 +114,7 @@ public enum HTMLTag: String
     case hr
     case span
     case form
+    case i
 
     case table
     case thead
