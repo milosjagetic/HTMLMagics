@@ -119,7 +119,7 @@ public enum HTMLTag: String
     case table
     case thead
     case tbody
-    case tfood
+    case tfoot
     case th
     case td
     case tr
