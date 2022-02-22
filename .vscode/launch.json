@@ -12,6 +12,14 @@
             "args": [],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "build"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Test HTMLMagics",
+            "program": "${workspaceFolder:HTMLMagics}/.build/debug/HTMLMagicsPackageTests.xctest",
+            "cwd": "${workspaceFolder:HTMLMagics}",
+            "preLaunchTask": "swift: Build All"
         }
     ]
 }

@@ -42,9 +42,11 @@ where AttributeKey.RawValue == String
         attributes = (attributes ?? [:]).setting([(key.rawValue, value)]) 
     }
 
-    func settingAttribute(_ key: AttributeKey, value: String?) -> Self
+    func settingAttribute(_ key: AttributeKey, value: CustomStringConvertible?, if condition: Bool = true) -> Self
     {
-        setAttribute(key, value: value)
+        guard condition else { return self }
+
+        setAttribute(key, value: value?.description)
 
         return self
     }
