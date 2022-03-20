@@ -29,6 +29,10 @@ open class Input: HTMLElement, HTMLAttributeAccess
         case type
         case placeholder
         case name
+        case disabled
+        case pattern
+        case required
+        case value
     }
 
     public required init(id: String? = nil,
