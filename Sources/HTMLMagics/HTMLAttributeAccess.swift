@@ -42,6 +42,7 @@ where AttributeKey.RawValue == String
         attributes = (attributes ?? [:]).setting([(key.rawValue, value)]) 
     }
 
+    @discardableResult
     func settingAttribute(_ key: AttributeKey, value: CustomStringConvertible?, if condition: Bool = true) -> Self
     {
         guard condition else { return self }
