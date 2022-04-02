@@ -22,6 +22,7 @@ open class Input: HTMLElement, HTMLAttributeAccess
         case text
         case checkbox
         case password
+        case hidden
     }
 
     public enum AttributeKey: String
