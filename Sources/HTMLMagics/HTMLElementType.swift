@@ -117,6 +117,7 @@ public enum HTMLTag: String
     case i
     case textarea
     case img
+    case header
     case footer
     
     case table
