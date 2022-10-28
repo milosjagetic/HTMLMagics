@@ -98,7 +98,8 @@ public enum HTMLTag: String
     case link
     case meta
     case title
-
+    case script
+    
     case div
     case input
     case label
@@ -117,6 +118,7 @@ public enum HTMLTag: String
     case i
     case textarea
     case img
+    case header
     case footer
     
     case table
