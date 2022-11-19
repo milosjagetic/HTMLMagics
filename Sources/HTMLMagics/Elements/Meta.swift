@@ -22,7 +22,7 @@ open class Meta: HTMLElement, HTMLAttributeAccess
         case charset
         case name
         case content
-        case httpEquiv
+        case httpEquiv = "http-equiv"
     }
     
     public enum Name: String
@@ -41,6 +41,9 @@ open class Meta: HTMLElement, HTMLAttributeAccess
         case contentType = "content-type"
         case defaultStyle = "default-style"
         case refresh
+        case cacheControl = "cache-control"
+        case expires
+        case pragma
     }
 
     public enum Charset: String
