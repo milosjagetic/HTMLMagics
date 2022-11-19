@@ -29,6 +29,7 @@ open class Form: HTMLContainerElement, HTMLAttributeAccess
         case noValidation = "novalidate"
         case rel
         case target
+        case onSubmit = "onsubmit"
     }
 
     public required init(id: String? = nil,
