@@ -23,6 +23,8 @@ open class Input: HTMLElement, HTMLAttributeAccess
         case checkbox
         case password
         case hidden
+        case date
+        case dateTimeLocal = "datetime-local"
     }
 
     public enum AttributeKey: String
